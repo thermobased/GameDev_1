@@ -17,6 +17,22 @@ public class Counter : MonoBehaviour
         count++;
         UpdateCounterText();
     }
+
+    public void DoubleCount()
+    {
+        count*=2;
+        UpdateCounterText();
+    }
+    public void DivideCount()
+    {
+        count/=2;
+        UpdateCounterText();
+    }
+    public void ResetCount()
+    {
+        count = 0;
+        UpdateCounterText();
+    }
     private void UpdateCounterText()
     {
         if (textComponent != null)
