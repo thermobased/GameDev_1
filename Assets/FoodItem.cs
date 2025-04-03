@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class FoodItem : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private int healAmount = 20;
+    [SerializeField] private int price = 0;
     private Player playerReference;
     
     private void Start()
@@ -21,7 +22,10 @@ public class FoodItem : MonoBehaviour, IPointerClickHandler
     // This method is called when the food item is clicked
     public void OnPointerClick(PointerEventData eventData)
     {
-        UseItem();
+        if (playerReference.Charge(price))
+        {
+            UseItem();
+        }
     }
     
     // Can also be called from a button

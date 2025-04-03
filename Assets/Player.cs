@@ -7,17 +7,24 @@ public class Player : MonoBehaviour
     [Header("Player Info")]
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int currentHealth = 50;
-    
+    [SerializeField] private int gold = 500;
     
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private TextMeshProUGUI goldText;
 
-    private void UpdateHealthUI()
+
+    private void UpdateStatsUI()
     {
         if (healthText != null)
         {
             healthText.text = $"{currentHealth}";
+        }
+
+        if (goldText != null)
+        {
+            goldText.text = $"Gold: {gold}";
         }
         
         if (healthSlider != null)
@@ -42,16 +49,27 @@ public class Player : MonoBehaviour
             }
             
             Debug.Log($"Healed for {healAmount}. Current health: {currentHealth}/{maxHealth}");
-            UpdateHealthUI();
+            UpdateStatsUI();
         }
         else
         {
             Debug.Log("Already at full health!");
         }
     }
+
+    public bool Charge(int chargeAmount)
+    {
+        if (chargeAmount <= gold)
+        {
+            gold -= chargeAmount;
+            return true;
+        }
+        return false;
+    }
     
     private void Start()
     {
-        UpdateHealthUI();
+        UpdateStatsUI();
     }
+
 }
